@@ -7,6 +7,10 @@ class Section {
   Section(this.title, this.number, this.paragraph, this.annotation);
 }
 
+final List indexes = List<int>.generate(52, (i) => i+1);
+
+final List lowerTitleList = List<String>.generate(titleList.length, (i) => titleList[i].toLowerCase());
+
 final List titleList = [
   "General Provisions",
   "The Congress",
@@ -111,7 +115,7 @@ final description_list = [
   "Title 44 of the United States Code outlines the role of public printing and documents in the United States Code.",
   "Title 45 of the United States Code outlines the role of rail transport in the United States Code.",
   "Title 46 of the United States Code outlines the role of shipping in the United States Code.",
-  "Title 47 of the United States Code defines the role and structure of the Federal Communications Commission, an independent agency of the United States government, and the National Telecommunications and Information Administration, part of the United States Department of Commerce.",
+  "Title 47 of the United States Code defines the role and structure of the United States Department of Commerce.",
   "Title 48 of the United States Code outlines the role of United States territories and insular areas in the United States Code.",
   "Title 49 of the United States Code is a code that regards the role of transportation in the United States of America.",
   "Title 50 of the United States Code outlines the role of War and National Defense in the United States Code.",

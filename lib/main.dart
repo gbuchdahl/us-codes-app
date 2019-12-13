@@ -66,12 +66,12 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.grey,
         scaffoldBackgroundColor: Color.fromRGBO(242, 242, 247, 1),
       ),
-      home: MyHomePage(),
+      home: TitleList(),
     );
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class TitleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -84,7 +84,7 @@ class MyHomePage extends StatelessWidget {
               Icons.menu,
               color: Colors.black,
             ),
-            onPressed: () {},
+            onPressed: () { },
           ),
           elevation: 4.0,
           title: Text(

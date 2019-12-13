@@ -6,15 +6,36 @@ class DataSearch extends SearchDelegate<String> {
 
   List giveMaster(List sleights) {
     var descriptions = [];
+    var index = [];
+    var titles = [];
 
     for (int i = 0; i < sleights.length; i++){
       for (int j = 0; j < titleList.length; j++) {
         if (titleList.where((p) => p.startsWith(query)).toList()[i] == titleList[j]){
           descriptions.add(description_list[j]);
+          index.add(indexes[j]);
+          titles.add(titleList[j]);
         }
       }
     }
-    return descriptions;
+    return [descriptions, index, titles];
+  }
+
+  List giveMaster2(List sleights, lowerQuery) {
+    var descriptions = [];
+    var index = [];
+    var titles = [];
+
+    for (int i = 0; i < sleights.length; i++){
+      for (int j = 0; j < lowerTitleList.length; j++) {
+        if (lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList()[i] == lowerTitleList[j]){
+          descriptions.add(description_list[j]);
+          index.add(indexes[j]);
+          titles.add(titleList[j]);
+        }
+      }
+    }
+    return [descriptions, index, titles];
   }
 
   @override
@@ -50,9 +71,35 @@ class DataSearch extends SearchDelegate<String> {
   // implement searching for title number functionality
   @override
   Widget buildSuggestions(BuildContext context) {
-    final suggestion_list = query.isEmpty
-        ? [titleList, description_list]
-        : [titleList.where((p) => p.startsWith(query)).toList(), giveMaster(titleList.where((p) => p.startsWith(query)).toList())];
+
+    bool isNumeric(String s) {
+      if(s == null) {
+        return false;
+      }
+      return double.parse(s) != null;
+    }
+
+    var suggestion_list = [];
+
+    if (query.isNotEmpty && isNumeric(query) == true){
+      var lowerQuery = query.toLowerCase();
+
+      suggestion_list = [
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[2],
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[0],
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[1]];
+    }
+    else if (query.isNotEmpty) {
+      var lowerQuery = query.toLowerCase();
+
+      suggestion_list = [
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[2],
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[0],
+        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[1]];
+    }
+    else {
+      suggestion_list = [titleList, description_list, indexes];
+    }
 
     return Container(
       color: Color.fromRGBO(242, 242, 247, 1),
@@ -66,7 +113,7 @@ class DataSearch extends SearchDelegate<String> {
             child: Padding(
               padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
               child: ListTile(
-                onTap: () { }, // clicking searched for item
+                onTap: () {}, // clicking searched for item
                 onLongPress: () {}, // bring up information page for item
                 leading: CircleAvatar(
                   backgroundColor: Colors.black,
@@ -75,7 +122,7 @@ class DataSearch extends SearchDelegate<String> {
                     backgroundColor: Colors.grey[200],
                     radius: 30.0,
                     child: Text(
-                      ToRoman(index + 1),
+                      ToRoman(suggestion_list[2][index]),
                       style: TextStyle(
                           fontWeight: FontWeight.bold,
                           color: Colors.black,
