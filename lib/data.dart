@@ -7,7 +7,8 @@ class Section {
   Section(this.title, this.number, this.paragraph, this.annotation);
 }
 
-final List titleList = ["General Provisions",
+final List titleList = [
+  "General Provisions",
   "The Congress",
   "The President",
   "Flag and Seal, Seat of Government, and the States",
@@ -60,7 +61,8 @@ final List titleList = ["General Provisions",
   "National and Commercial Space Programs",
   "Voting and Elections",
   "Reserved",
-  "National Park Service and Related Programs"];
+  "National Park Service and Related Programs"
+];
 
 final description_list = [
   "Title 1 of the United States Code outlines the general provisions of the United States Code.",
@@ -104,21 +106,20 @@ final description_list = [
   "Description of the title.",
   "Description of the title.",
   "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
-  "Description of the title.",
+  "Title 42 of the United States Code is the United States Code dealing with MERGE CONFLICTS.",
+  "Title 43 of the United States Code outlines the role of Public Lands in the United States Code.",
+  "Title 44 of the United States Code outlines the role of public printing and documents in the United States Code.",
+  "Title 45 of the United States Code outlines the role of rail transport in the United States Code.",
+  "Title 46 of the United States Code outlines the role of shipping in the United States Code.",
+  "Title 47 of the United States Code defines the role and structure of the Federal Communications Commission, an independent agency of the United States government, and the National Telecommunications and Information Administration, part of the United States Department of Commerce.",
+  "Title 48 of the United States Code outlines the role of United States territories and insular areas in the United States Code.",
+  "Title 49 of the United States Code is a code that regards the role of transportation in the United States of America.",
+  "Title 50 of the United States Code outlines the role of War and National Defense in the United States Code.",
+  "Title 51 of the United States Code is the compilation of the general laws regarding space programs.",
+  "Title 52 of the United States Code is a codification of the \"general and permanent\" voting and election laws of the United States federal government.",
+  "Title 53 is reserved.",
+  "Title 54 of the United States Code is the compilation of the general laws regarding the National Park Service.",
 ];
-
 
 final List sectionList = [
   [
@@ -128,9 +129,9 @@ final List sectionList = [
             "Words denoting number, gender, and so forth",
             1,
             "This is the Section's information",
-            "(July 30, 1947, ch. 388, 61 Stat. 633; June 25, 1948, ch. 645, § 6, 62 Stat. 859; Oct. 31, 1951, ch. 655, § 1, 65 Stat. 710; Pub. L. 112–231, § 2(a), Dec. 28, 2012, 126 Stat. 1619.)"
-        ),
-        Section("\"County\" as including \"parish\", and so forth",
+            "(July 30, 1947, ch. 388, 61 Stat. 633; June 25, 1948, ch. 645, § 6, 62 Stat. 859; Oct. 31, 1951, ch. 655, § 1, 65 Stat. 710; Pub. L. 112–231, § 2(a), Dec. 28, 2012, 126 Stat. 1619.)"),
+        Section(
+            "\"County\" as including \"parish\", and so forth",
             2,
             "The word \"county\" includes a parish, or any other equivalent subdivision of a State or Territory of the United States.",
             "(July 30, 1947, ch. 388, 61 Stat. 633.)"),
