@@ -67,7 +67,7 @@ final description_list = [
   "Title 2 of the United States Code outlines the role of Congress in the United States Code.",
   "Title 3 of the United States Code outlines the role of the President of the United States in the United States Code.",
   "Title 4 of the United States Code outlines the role of flag of the United States, Great Seal of the United States, Washington, DC, and the states in the United States Code.",
-  "Description of the title.",
+  "Title 5 of the United States Code outlines the role of government organization and employees in the United States Code.",
   "Description of the title.",
   "Description of the title.",
   "Description of the title.",
