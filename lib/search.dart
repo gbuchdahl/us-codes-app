@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
 import 'main.dart';
+import 'chapter.dart';
+import 'section.dart';
+import 'title.dart';
 
 class DataSearch extends SearchDelegate<String> {
+
   List giveMaster(List sleights) {
     var descriptions = [];
     var index = [];
@@ -104,9 +108,9 @@ class DataSearch extends SearchDelegate<String> {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                 child: ListTile(
-                  onTap: () {}, // clicking searched for item
+                  onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); }, // clicking searched for item
                   onLongPress: () {}, // bring up information page for item
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,

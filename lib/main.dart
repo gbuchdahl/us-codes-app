@@ -20,29 +20,33 @@ class SplashScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Center(
-                child: CircleAvatar(
-                  radius: 100.0,
-                  backgroundColor: Colors.black87,
                   child: CircleAvatar(
+                radius: 100.0,
+                backgroundColor: Colors.black87,
+                child: CircleAvatar(
                     radius: 90.0,
                     backgroundColor: Colors.blueAccent,
-                    child: Icon(Icons.account_balance, size: 100.0, color: Colors.white,)
-                  ),
-                )
-              ),
+                    child: Icon(
+                      Icons.account_balance,
+                      size: 100.0,
+                      color: Colors.white,
+                    )),
+              )),
               Padding(
                 padding: const EdgeInsets.only(top: 40.0),
                 child: Center(
                   child: Container(
                     child: Column(
-                      children: <Widget> [
+                      children: <Widget>[
                         Text(
                           "U.S. CODE",
-                          style: TextStyle(fontSize: 40.0, fontWeight: FontWeight.bold),
+                          style: TextStyle(
+                              fontSize: 40.0, fontWeight: FontWeight.bold),
                         ),
                         Text(
                           "Titles 1-54",
-                          style: TextStyle(fontSize: 30.0, fontWeight: FontWeight.normal),
+                          style: TextStyle(
+                              fontSize: 30.0, fontWeight: FontWeight.normal),
                         ),
                       ],
                     ),
@@ -76,35 +80,87 @@ class TitleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.menu,
-              color: Colors.black,
-            ),
-            onPressed: () { },
-          ),
-          elevation: 4.0,
-          title: Text(
-            "U.S. Code",
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.black,
+      backgroundColor: Colors.white,
+      drawer: new Drawer(
+        child: new ListView(
+          children: <Widget>[
+            DrawerHeader(
+              child: CircleAvatar(
+                radius: 70.0,
+                backgroundColor: Colors.black87,
+                child: CircleAvatar(
+                    radius: 65.0,
+                    backgroundColor: Colors.blueAccent,
+                    child: Icon(
+                      Icons.account_balance,
+                      size: 85.0,
+                      color: Colors.white,
+                    )),
               ),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              },
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: Colors.grey[300],
+                    width: 2.0
+                  ),
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 5.0),
+                child: Text(
+                  "U.S. CODE",
+                  style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.bold),
+                ),
+              ),
+            ),
+            Center(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 5.0),
+                child: Text(
+                  "Titles 1-54",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+                ),
+              ),
+            ),
+            new Divider(
+              thickness: 2.0,
+            ),
+            GestureDetector(
+              onTap: () {},
+              onLongPress: () {},
+              child: new ListTile(
+                contentPadding: EdgeInsets.all(0.0),
+                leading: Icon(Icons.perm_identity, color: Colors.black, size: 30.0,),
+                title: Text('About', style: TextStyle(fontSize: 16.0),),
+                trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 20.0,),
+              ),
             ),
           ],
-          backgroundColor: Colors.white,
         ),
-        body: MainList(),
-      );
+      ),
+      appBar: AppBar(
+        elevation: 4.0,
+        title: Text(
+          "U.S. Code",
+          style: TextStyle(color: Colors.black),
+        ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.search,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              showSearch(context: context, delegate: DataSearch());
+            },
+          ),
+        ],
+        backgroundColor: Colors.white,
+      ),
+      body: MainList(),
+    );
   }
 }
 
@@ -121,10 +177,17 @@ class MainList extends StatelessWidget {
             Container(
               color: Colors.white,
               child: Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                 child: ListTile(
-                  onTap: () {  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); },         // clicking searched for item
-                  onLongPress: () { print("Long"); },   // bring up information page for item
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => ChapterList(index)));
+                  }, // clicking searched for item
+                  onLongPress: () {
+                    print("Long");
+                  }, // bring up information page for item
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 32.0,

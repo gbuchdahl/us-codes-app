@@ -3,14 +3,13 @@ import 'main.dart';
 import 'data.dart';
 import 'search.dart';
 import 'title.dart';
-import 'section.dart';
-import 'screensize.dart';
 
-class SectionList extends StatelessWidget {
+class ParagraphList extends StatelessWidget {
 
   int titleIndex;
   int chapterIndex;
-  SectionList(this.titleIndex, this.chapterIndex);
+  int sectionIndex;
+  ParagraphList(this.titleIndex, this.chapterIndex, this.sectionIndex);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +25,7 @@ class SectionList extends StatelessWidget {
           ),
           elevation: 4.0,
           title: Text(
-            "${titleIndex + 1} U.S. Code Chapter ${chapterIndex + 1}",
+            "${titleIndex + 1} U.S. Code §${sectionIndex + 1}",
             style: TextStyle(color: Colors.black),
           ),
           actions: <Widget>[
@@ -44,24 +43,23 @@ class SectionList extends StatelessWidget {
         ),
         body: Container(
           color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
-          child: ListView.builder(
-            itemBuilder: (context, index) => Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
+          child: Container(
+            color: Colors.white,
+            child: ListView(
               children: <Widget>[
                 Container(
                   color: Colors.white,
                   child: Padding(
-                    padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                    padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
                     child: ListTile(
-                      onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ParagraphList(titleIndex, chapterIndex, index))); },         // clicking searched for item
-                      onLongPress: () { showSection(context, titleIndex, chapterIndex, index); },   // bring up information page for item
+                      onTap: () {},         // clicking searched for item
+                      onLongPress: () {},   // bring up information page for item
                       leading: Container(
                         height: 50.0, width: 50.0,
                         color: Colors.grey[200],
                         child: Center(
                           child: Text(
-                            "§${index + 1}",
+                            "§${sectionIndex + 1}",
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 color: Colors.black,
@@ -71,30 +69,28 @@ class SectionList extends StatelessWidget {
                       ),
                       title: RichText(
                         text: TextSpan(
-                          text: sectionList[titleIndex][chapterIndex][index],
+                          text: sectionList[titleIndex][chapterIndex][sectionIndex], //paragraphList[titleIndex][chapterIndex][sectionIndex][0],
                           style: TextStyle(
                               color: Colors.black,
                               fontWeight: FontWeight.normal,
                               fontSize: 18.0),
                         ),
                       ),
-//                      subtitle: Padding(
-//                        padding: const EdgeInsets.only(top: 5.0),
-//                        child: Text(chapterSectionList[titleIndex][index]),
-//                      ),
-//                  trailing: Icon(Icons.arrow_right),
                     ),
                   ),
                 ),
                 Container(
-                  height: 1.0,
                   color: Colors.grey[300],
+                  height: 1.0,
                 ),
+                Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Text(paragraphList[titleIndex][chapterIndex][sectionIndex][0]),
+                )
               ],
             ),
-            itemCount: sectionList[titleIndex][chapterIndex].length,
           ),
-        )
+        ),
     );
   }
 
@@ -116,55 +112,5 @@ class SectionList extends StatelessWidget {
     if (index >= 5) return "V" + ToRoman(index - 5);
     if (index >= 4) return "IV" + ToRoman(index - 4);
     if (index >= 1) return "I" + ToRoman(index - 1);
-  }
-
-  void showSection(context, titleIndex, chapterIndex, index) {
-    showBottomSheet(
-        context: context,
-        builder: (context) => Container(
-          decoration: new BoxDecoration(
-            borderRadius: new BorderRadius.circular(6.0),
-            border: new Border.all(
-              width: 3.0,
-              color: Colors.grey[300],
-            ),
-          ),
-          height: screenHeightExcludingToolbar(context, dividedBy: 1.5),
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: ListView(
-              children: <Widget>[
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: <Widget> [
-                    Text(
-                      "${titleIndex + 1} U.S. Code §${index + 1}",
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0),
-                    ),
-                    IconButton(
-                      icon: Icon(Icons.expand_more),
-                      onPressed: () => {Navigator.pop(context)},
-                    ),
-                  ],
-                ),
-                Container(
-                  height: 1.0,
-                  color: Colors.grey[300],
-                ),
-                Padding(
-                  padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(paragraphList[titleIndex][chapterIndex][index][0],
-                  style: TextStyle(
-                    fontSize: 18.0
-                  ),),
-                )
-              ],
-            ),
-          ),
-      ),
-    );
   }
 }
