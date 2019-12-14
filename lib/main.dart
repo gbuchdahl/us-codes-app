@@ -3,6 +3,7 @@ import 'screensize.dart';
 import 'data.dart';
 import 'search.dart';
 import 'API.dart';
+import 'title.dart';
 
 void main() => runApp(MyApp());
 
@@ -74,9 +75,7 @@ class MyApp extends StatelessWidget {
 class TitleList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
+    return Scaffold(
         backgroundColor: Colors.white,
         appBar: AppBar(
           leading: IconButton(
@@ -105,8 +104,7 @@ class TitleList extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         body: MainList(),
-      ),
-    );
+      );
   }
 }
 
@@ -114,7 +112,7 @@ class MainList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white, // Color.fromRGBO(242, 242, 247, 1),
+      color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
       child: ListView.builder(
         itemBuilder: (context, index) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -125,8 +123,8 @@ class MainList extends StatelessWidget {
               child: Padding(
                 padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
                 child: ListTile(
-                  onTap: () {}, // clicking searched for item
-                  onLongPress: () {}, // bring up information page for item
+                  onTap: () {  Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); },         // clicking searched for item
+                  onLongPress: () { print("Long"); },   // bring up information page for item
                   leading: CircleAvatar(
                     backgroundColor: Colors.black,
                     radius: 32.0,
@@ -151,7 +149,8 @@ class MainList extends StatelessWidget {
                           fontSize: 20.0),
                     ),
                   ),
-                  subtitle: Text(description_list[index]),
+                  subtitle: Text(titleDescriptionList[index]),
+//                  trailing: Icon(Icons.arrow_right),
                 ),
               ),
             ),

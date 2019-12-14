@@ -12,7 +12,7 @@ class DataSearch extends SearchDelegate<String> {
       for (int j = 0; j < titleList.length; j++) {
         if (titleList.where((p) => p.startsWith(query)).toList()[i] ==
             titleList[j]) {
-          descriptions.add(description_list[j]);
+          descriptions.add(titleDescriptionList[j]);
           index.add(indexes[j]);
           titles.add(titleList[j]);
         }
@@ -30,7 +30,7 @@ class DataSearch extends SearchDelegate<String> {
       for (int j = 0; j < lowerTitleList.length; j++) {
         if (lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList()[i] ==
             lowerTitleList[j]) {
-          descriptions.add(description_list[j]);
+          descriptions.add(titleDescriptionList[j]);
           index.add(indexes[j]);
           titles.add(titleList[j]);
         }
@@ -72,17 +72,10 @@ class DataSearch extends SearchDelegate<String> {
   // implement searching for title number functionality
   @override
   Widget buildSuggestions(BuildContext context) {
-    // bool isNumeric(String s) {
-    //   if (s == null) {
-    //     return false;
-    //   }
-    //   return double.parse(s) != null;
-    // }
 
     var suggestion_list = [];
 
     if (query.isNotEmpty) {
-      // && isNumeric(query) == true) {
       var lowerQuery = query.toLowerCase();
 
       suggestion_list = [
@@ -96,22 +89,9 @@ class DataSearch extends SearchDelegate<String> {
             lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
             lowerQuery)[1]
       ];
-    } else if (query.isNotEmpty) {
-      var lowerQuery = query.toLowerCase();
-
-      suggestion_list = [
-        giveMaster2(
-            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
-            lowerQuery)[2],
-        giveMaster2(
-            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
-            lowerQuery)[0],
-        giveMaster2(
-            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
-            lowerQuery)[1]
-      ];
-    } else {
-      suggestion_list = [titleList, description_list, indexes];
+    }
+    else {
+      suggestion_list = [titleList, titleDescriptionList, indexes];
     }
 
     return Container(
@@ -170,7 +150,7 @@ class DataSearch extends SearchDelegate<String> {
             ),
           ],
         ),
-        itemCount: suggestion_list[0].length,
+        itemCount: suggestion_list[2].length,
       ),
     );
   }
