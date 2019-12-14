@@ -3,15 +3,15 @@ import 'data.dart';
 import 'main.dart';
 
 class DataSearch extends SearchDelegate<String> {
-
   List giveMaster(List sleights) {
     var descriptions = [];
     var index = [];
     var titles = [];
 
-    for (int i = 0; i < sleights.length; i++){
+    for (int i = 0; i < sleights.length; i++) {
       for (int j = 0; j < titleList.length; j++) {
-        if (titleList.where((p) => p.startsWith(query)).toList()[i] == titleList[j]){
+        if (titleList.where((p) => p.startsWith(query)).toList()[i] ==
+            titleList[j]) {
           descriptions.add(description_list[j]);
           index.add(indexes[j]);
           titles.add(titleList[j]);
@@ -26,9 +26,10 @@ class DataSearch extends SearchDelegate<String> {
     var index = [];
     var titles = [];
 
-    for (int i = 0; i < sleights.length; i++){
+    for (int i = 0; i < sleights.length; i++) {
       for (int j = 0; j < lowerTitleList.length; j++) {
-        if (lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList()[i] == lowerTitleList[j]){
+        if (lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList()[i] ==
+            lowerTitleList[j]) {
           descriptions.add(description_list[j]);
           index.add(indexes[j]);
           titles.add(titleList[j]);
@@ -71,33 +72,45 @@ class DataSearch extends SearchDelegate<String> {
   // implement searching for title number functionality
   @override
   Widget buildSuggestions(BuildContext context) {
-
-    bool isNumeric(String s) {
-      if(s == null) {
-        return false;
-      }
-      return double.parse(s) != null;
-    }
+    // bool isNumeric(String s) {
+    //   if (s == null) {
+    //     return false;
+    //   }
+    //   return double.parse(s) != null;
+    // }
 
     var suggestion_list = [];
 
-    if (query.isNotEmpty && isNumeric(query) == true){
+    if (query.isNotEmpty) {
+      // && isNumeric(query) == true) {
       var lowerQuery = query.toLowerCase();
 
       suggestion_list = [
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[2],
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[0],
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[1]];
-    }
-    else if (query.isNotEmpty) {
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[2],
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[0],
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[1]
+      ];
+    } else if (query.isNotEmpty) {
       var lowerQuery = query.toLowerCase();
 
       suggestion_list = [
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[2],
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[0],
-        giveMaster2(lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(), lowerQuery)[1]];
-    }
-    else {
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[2],
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[0],
+        giveMaster2(
+            lowerTitleList.where((p) => p.startsWith(lowerQuery)).toList(),
+            lowerQuery)[1]
+      ];
+    } else {
       suggestion_list = [titleList, description_list, indexes];
     }
 
@@ -107,51 +120,54 @@ class DataSearch extends SearchDelegate<String> {
         itemBuilder: (context, index) => Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget> [
+          children: <Widget>[
             Container(
-            color: Colors.white,
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-              child: ListTile(
-                onTap: () {}, // clicking searched for item
-                onLongPress: () {}, // bring up information page for item
-                leading: CircleAvatar(
-                  backgroundColor: Colors.black,
-                  radius: 32.0,
-                  child: CircleAvatar(
-                    backgroundColor: Colors.grey[200],
-                    radius: 30.0,
-                    child: Text(
-                      ToRoman(suggestion_list[2][index]),
-                      style: TextStyle(
-                          fontWeight: FontWeight.bold,
-                          color: Colors.black,
-                          fontSize: 14.0),
+              color: Colors.white,
+              child: Padding(
+                padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                child: ListTile(
+                  onTap: () {}, // clicking searched for item
+                  onLongPress: () {}, // bring up information page for item
+                  leading: CircleAvatar(
+                    backgroundColor: Colors.black,
+                    radius: 32.0,
+                    child: CircleAvatar(
+                      backgroundColor: Colors.grey[200],
+                      radius: 30.0,
+                      child: Text(
+                        ToRoman(suggestion_list[2][index]),
+                        style: TextStyle(
+                            fontWeight: FontWeight.bold,
+                            color: Colors.black,
+                            fontSize: 14.0),
+                      ),
                     ),
                   ),
+                  title: RichText(
+                    text: TextSpan(
+                        text: suggestion_list[0][index]
+                            .substring(0, query.length),
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20.0),
+                        children: [
+                          TextSpan(
+                            text: suggestion_list[0][index]
+                                .substring(query.length),
+                            style:
+                                TextStyle(color: Colors.grey, fontSize: 20.0),
+                          )
+                        ]),
+                  ),
+                  subtitle: Text(suggestion_list[1][index]),
                 ),
-                title: RichText(
-                  text: TextSpan(
-                      text: suggestion_list[0][index].substring(0, query.length),
-                      style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20.0),
-                      children: [
-                        TextSpan(
-                          text: suggestion_list[0][index].substring(query.length),
-                          style: TextStyle(color: Colors.grey, fontSize: 20.0),
-                        )
-                      ]),
-                ),
-                subtitle: Text(suggestion_list[1][index]),
               ),
             ),
-          ),
-          Container(
-            height: 1.0,
-            color: Colors.grey[300],
-          ),
+            Container(
+              height: 1.0,
+              color: Colors.grey[300],
+            ),
           ],
         ),
         itemCount: suggestion_list[0].length,
