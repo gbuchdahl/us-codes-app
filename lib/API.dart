@@ -8,6 +8,7 @@ import 'dart:convert';
 Future<Post> fetchPost(int page) async {
 
   final response = await http.get('https://swapi.co/api/starships/${page}/');
+  print(response)
 
   if (response.statusCode == 200) {
     // If the call to the server was successful, parse the JSON.
