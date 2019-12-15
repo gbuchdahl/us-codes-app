@@ -5,7 +5,6 @@ import 'search.dart';
 import 'title.dart';
 
 class ParagraphList extends StatelessWidget {
-
   int titleIndex;
   int chapterIndex;
   int sectionIndex;
@@ -14,83 +13,86 @@ class ParagraphList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          leading: IconButton(
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.black,
-            ),
-            onPressed: () { Navigator.pop(context); },
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        leading: IconButton(
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.black,
           ),
-          elevation: 4.0,
-          title: Text(
-            "${titleIndex + 1} U.S. Code §${sectionIndex + 1}",
-            style: TextStyle(color: Colors.black),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                Icons.search,
-                color: Colors.black,
-              ),
-              onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
-              },
-            ),
-          ],
-          backgroundColor: Colors.white,
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-        body: Container(
-          color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
-          child: Container(
-            color: Colors.white,
-            child: ListView(
-              children: <Widget>[
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                    child: ListTile(
-                      onTap: () {},         // clicking searched for item
-                      onLongPress: () {},   // bring up information page for item
-                      leading: Container(
-                        height: 50.0, width: 50.0,
-                        color: Colors.grey[200],
-                        child: Center(
-                          child: Text(
-                            "§${sectionIndex + 1}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 14.0),
+        elevation: 4.0,
+        title: Text(
+          "${titleIndex + 1} U.S.C. §${sectionIndex + 1}",
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: Colors.white,
+      ),
+      body: Container(
+        color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
+        child: Container(
+          color: Colors.white,
+          child: ListView(
+            children: <Widget>[
+              Container(
+                color: Colors.lightBlue[100].withOpacity(0.5),
+                child: Padding(
+                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                  child: ListTile(
+                    onTap: () {}, // clicking searched for item
+                    onLongPress: () {}, // bring up information page for item
+                    leading: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      color: Colors.black,
+                      child: Center(
+                        child: Container(
+                          height: 47.0,
+                          width: 47.0,
+                          color: Colors.grey[200],
+                          child: Center(
+                            child: Text(
+                              "§${sectionIndex + 1}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 14.0),
+                            ),
                           ),
                         ),
                       ),
-                      title: RichText(
-                        text: TextSpan(
-                          text: sectionList[titleIndex][chapterIndex][sectionIndex], //paragraphList[titleIndex][chapterIndex][sectionIndex][0],
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.normal,
-                              fontSize: 18.0),
-                        ),
+                    ),
+                    title: RichText(
+                      text: TextSpan(
+                        text: sectionList[titleIndex][chapterIndex][
+                            sectionIndex], //paragraphList[titleIndex][chapterIndex][sectionIndex][0],
+                        style: TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 18.0),
                       ),
                     ),
                   ),
                 ),
-                Container(
-                  color: Colors.grey[300],
-                  height: 1.0,
+              ),
+              Container(
+                color: Colors.grey[300],
+                height: 1.0,
+              ),
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Text(
+                  paragraphList[titleIndex][chapterIndex][sectionIndex][0],
+                  style: TextStyle(fontSize: 18.0),
                 ),
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Text(paragraphList[titleIndex][chapterIndex][sectionIndex][0]),
-                )
-              ],
-            ),
+              ),
+            ],
           ),
         ),
+      ),
     );
   }
 

@@ -7,7 +7,9 @@ class Section {
   Section(this.title, this.number, this.paragraph, this.annotation);
 }
 
-final List indexes = List<int>.generate(54, (i) => i+1);
+final List indexes = List<int>.generate(titleList.length, (i) => i+1);
+
+final List chapterIndexes = List<int>.generate(chapterList.length, (i) => i+1);
 
 final List lowerTitleList = List<String>.generate(titleList.length, (i) => titleList[i].toLowerCase());
 
@@ -154,7 +156,7 @@ final sectionList = [
 final paragraphList = [
   [
     [
-      ["Paragraph 1"]
+      ["In determining the meaning of any Act of Congress, unless the context indicates otherwise—\n\n\t\t\t\t\t\twords importing the singular include and apply to several persons, parties, or things;\n\n\t\t\t\t\t\twords importing the plural include the singular;\n\n\t\t\t\t\t\twords importing the masculine gender include the feminine as well;\n\n\t\t\t\t\t\twords used in the present tense include the future as well as the present;\n\n\t\t\t\t\t\tthe words \"insane\" and \"insane person\" shall include every idiot, insane person, and person non compos mentis;\n\n\t\t\t\t\t\tthe words \"person\" and \"whoever\" include corporations, companies, associations, firms, partnerships, societies, and joint stock companies, as well as individuals;\n\n\t\t\t\t\t\t\"officer\" includes any person authorized by law to perform the duties of the office;\n\n\t\t\t\t\t\t\"signature\" or \"subscription\" includes a mark when the person making the same intended it as such;\n\n\t\t\t\t\t\t\"oath\" includes affirmation, and \"sworn\" includes affirmed;\n\n\t\t\t\t\t\t\"writing\" includes printing and typewriting and reproductions of visual symbols by photographing, multigraphing, mimeographing, manifolding, or otherwise.\n\n(July 30, 1947, ch. 388, 61 Stat. 633; June 25, 1948, ch. 645, § 6, 62 Stat. 859; Oct. 31, 1951, ch. 655, § 1, 65 Stat. 710; Pub. L. 112–231, § 2(a), Dec. 28, 2012, 126 Stat. 1619.)"]
     ]
   ]
 ];

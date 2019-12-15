@@ -25,7 +25,7 @@ class SplashScreen extends StatelessWidget {
                 backgroundColor: Colors.black87,
                 child: CircleAvatar(
                     radius: 90.0,
-                    backgroundColor: Colors.blueAccent,
+                    backgroundColor: Colors.lightBlue[100].withOpacity(0.5),
                     child: Icon(
                       Icons.account_balance,
                       size: 100.0,
@@ -85,18 +85,7 @@ class TitleList extends StatelessWidget {
         child: new ListView(
           children: <Widget>[
             DrawerHeader(
-              child: CircleAvatar(
-                radius: 70.0,
-                backgroundColor: Colors.black87,
-                child: CircleAvatar(
-                    radius: 65.0,
-                    backgroundColor: Colors.blueAccent,
-                    child: Icon(
-                      Icons.account_balance,
-                      size: 85.0,
-                      color: Colors.white,
-                    )),
-              ),
+              child: Logo(),
               decoration: BoxDecoration(
                 border: Border(
                   bottom: BorderSide(
@@ -127,16 +116,25 @@ class TitleList extends StatelessWidget {
             new Divider(
               thickness: 2.0,
             ),
-            GestureDetector(
-              onTap: () {},
-              onLongPress: () {},
-              child: new ListTile(
-                contentPadding: EdgeInsets.all(0.0),
-                leading: Icon(Icons.perm_identity, color: Colors.black, size: 30.0,),
-                title: Text('About', style: TextStyle(fontSize: 16.0),),
-                trailing: Icon(Icons.keyboard_arrow_right, color: Colors.black, size: 20.0,),
+            Padding(
+              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  RichText(
+                    text: TextSpan(
+                      style: TextStyle(fontSize: 16.0, color: Colors.black),
+                      children: <TextSpan>[
+                        TextSpan(text: "U.S. Codes ", style: TextStyle(fontWeight: FontWeight.bold),),
+                        TextSpan(text: "is an app developed by Gabe Buchdahl (Yale '22) and Max Lukianchikov (Yale '20) as part of the class, "),
+                        TextSpan(text: "CPSC 183: Law, Technology, and Culture.", style: TextStyle(fontStyle: FontStyle.italic))
+                      ],
+                    ),
+                  ),
+                ],
               ),
-            ),
+            )
           ],
         ),
       ),
@@ -153,7 +151,7 @@ class TitleList extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              showSearch(context: context, delegate: DataSearch());
+              showSearch(context: context, delegate: TitleDataSearch(titleList, titleDescriptionList));
             },
           ),
         ],
@@ -188,18 +186,20 @@ class MainList extends StatelessWidget {
                   onLongPress: () {
                     print("Long");
                   }, // bring up information page for item
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.black,
-                    radius: 32.0,
+                  leading: Container(
                     child: CircleAvatar(
-                      backgroundColor: Colors.grey[200],
-                      radius: 30.0,
-                      child: Text(
-                        ToRoman(index + 1),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14.0),
+                      backgroundColor: Colors.black,
+                      radius: 32.0,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey[200],
+                        radius: 26.0,
+                        child: Text(
+                          ToRoman(index + 1),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 14.0),
+                        ),
                       ),
                     ),
                   ),
@@ -246,5 +246,45 @@ class MainList extends StatelessWidget {
     if (index >= 5) return "V" + ToRoman(index - 5);
     if (index >= 4) return "IV" + ToRoman(index - 4);
     if (index >= 1) return "I" + ToRoman(index - 1);
+  }
+}
+
+
+class Logo extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return CircleAvatar(
+      radius: 70.0,
+      backgroundColor: Colors.black87,
+      child: CircleAvatar(
+        radius: 65.0,
+        backgroundColor: Colors.lightBlue[100],
+        child: Stack(
+          children: <Widget>[
+            Center(
+              child: Icon(
+                Icons.account_balance,
+                size: 75.0,
+                color: Colors.black,
+              ),
+            ),
+            Center(
+              child: Icon(
+                Icons.account_balance,
+                size: 90.0,
+                color: Colors.black,
+              ),
+            ),
+            Center(
+              child: Icon(
+                Icons.account_balance,
+                size: 85.0,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

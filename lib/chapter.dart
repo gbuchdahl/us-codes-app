@@ -36,7 +36,7 @@ class SectionList extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
+                showSearch(context: context, delegate: DataSearch(titleList, titleDescriptionList));
               },
             ),
           ],
@@ -57,15 +57,23 @@ class SectionList extends StatelessWidget {
                       onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ParagraphList(titleIndex, chapterIndex, index))); },         // clicking searched for item
                       onLongPress: () { showSection(context, titleIndex, chapterIndex, index); },   // bring up information page for item
                       leading: Container(
-                        height: 50.0, width: 50.0,
-                        color: Colors.grey[200],
+                        height: 50.0,
+                        width: 50.0,
+                        color: Colors.black,
                         child: Center(
-                          child: Text(
-                            "§${index + 1}",
-                            style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                color: Colors.black,
-                                fontSize: 14.0),
+                          child: Container(
+                            height: 47.0,
+                            width: 47.0,
+                            color: Colors.grey[200],
+                            child: Center(
+                              child: Text(
+                                "§${index + 1}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: 14.0),
+                              ),
+                            ),
                           ),
                         ),
                       ),
@@ -131,7 +139,7 @@ class SectionList extends StatelessWidget {
           ),
           height: screenHeightExcludingToolbar(context, dividedBy: 1.5),
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.only(left: 10.0, right: 10.0, bottom: 10.0),
             child: ListView(
               children: <Widget>[
                 Row(

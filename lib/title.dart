@@ -38,7 +38,7 @@ class ChapterList extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch());
+                showSearch(context: context, delegate: ChapterDataSearch(titleIndex, chapterList[titleIndex], chapterSectionList[titleIndex], chapterIndexes[titleIndex]));
               },
             ),
           ],
@@ -67,15 +67,23 @@ class ChapterList extends StatelessWidget {
                           },
                           // bring up information page for item
                           leading: Container(
-                            height: 50.0, width: 50.0,
-                            color: Colors.grey[200],
+                            height: 50.0,
+                            width: 50.0,
+                            color: Colors.black,
                             child: Center(
-                              child: Text(
-                                ToRoman(index + 1),
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    color: Colors.black,
-                                    fontSize: 14.0),
+                              child: Container(
+                                height: 47.0,
+                                width: 47.0,
+                                color: Colors.grey[200],
+                                child: Center(
+                                  child: Text(
+                                    "${ToRoman(index + 1)}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontSize: 14.0),
+                                  ),
+                                ),
                               ),
                             ),
                           ),
@@ -141,62 +149,65 @@ class ChapterList extends StatelessWidget {
               ),
             ),
             height: screenHeightExcludingToolbar(context, dividedBy: 1.5),
-            child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: ListView.builder(
-                    itemBuilder: (context, index) =>
-                        Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.center,
-                          children: <Widget>[
-                            Container(
-                              color: Colors.white,
-                              child: Padding(
-                                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                                child: ListTile(
-                                  onTap: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (context) =>
-                                            ParagraphList(
-                                                titleIndex, chapterIndex, index)));
-                                  },
-                                  // clicking searched for item
-                                  onLongPress: () {},
-                                  // bring up information page for item
-                                  leading: Container(
-                                    height: 50.0, width: 50.0,
-                                    color: Colors.grey[200],
-                                    child: Center(
-                                      child: Text(
-                                        "§${index + 1}",
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.bold,
-                                            color: Colors.black,
-                                            fontSize: 14.0),
+            child: Container(
+              color: Colors.white,
+              child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: ListView.builder(
+                      itemBuilder: (context, index) =>
+                          Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: <Widget>[
+                              Container(
+                                color: Colors.white,
+                                child: Padding(
+                                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                                  child: ListTile(
+                                    onTap: () {
+                                      Navigator.push(context, MaterialPageRoute(
+                                          builder: (context) =>
+                                              ParagraphList(
+                                                  titleIndex, chapterIndex, index)));
+                                    },
+                                    // clicking searched for item
+                                    onLongPress: () {},
+                                    // bring up information page for item
+                                    leading: Container(
+                                      height: 50.0, width: 50.0,
+                                      color: Colors.grey[200],
+                                      child: Center(
+                                        child: Text(
+                                          "§${index + 1}",
+                                          style: TextStyle(
+                                              fontWeight: FontWeight.bold,
+                                              color: Colors.black,
+                                              fontSize: 14.0),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  title: RichText(
-                                    text: TextSpan(
-                                      text: sectionList[titleIndex][chapterIndex][index],
-                                      style: TextStyle(
-                                          color: Colors.black,
-                                          fontWeight: FontWeight.normal,
-                                          fontSize: 18.0),
+                                    title: RichText(
+                                      text: TextSpan(
+                                        text: sectionList[titleIndex][chapterIndex][index],
+                                        style: TextStyle(
+                                            color: Colors.black,
+                                            fontWeight: FontWeight.normal,
+                                            fontSize: 18.0),
+                                      ),
                                     ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Container(
-                              height: 1.0,
-                              color: Colors.grey[300],
-                            ),
-                          ],
-                        ),
-                    itemCount: sectionList[titleIndex][chapterIndex].length,
-                  ),
-              ),
+                              Container(
+                                height: 1.0,
+                                color: Colors.grey[300],
+                              ),
+                            ],
+                          ),
+                      itemCount: sectionList[titleIndex][chapterIndex].length,
+                    ),
+                ),
+            ),
           ),
     );
   }
