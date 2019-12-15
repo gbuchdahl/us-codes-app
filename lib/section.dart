@@ -89,7 +89,7 @@ class ParagraphList extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Text(
-                  paragraphList[titleIndex][chapterIndex][sectionIndex][0],
+                  paragraphList[titleIndex][chapterIndex][sectionIndex][0], // remove [0] after Gabe is done
                   style: TextStyle(fontSize: 18.0),
                 ),
               ),
