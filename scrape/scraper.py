@@ -11,37 +11,35 @@ API_KEY = config.API_KEY
 
 
 def main():
-    open("test.json", "w").close()
     chapterList, chapterDescriptionList, sectionList, paragraphList = [], [], [], []
 
-    for i in range(1, 2):
+    for i in range(1, 53):
         chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = pull_title(i)
         chapterList.append(chapterArr)
         sectionList.append(sectionArr)
         paragraphList.append(paragraphArr)
         chapterDescriptionList.append(chapterDescriptionArr)
-
-    with open("template.txt") as template:
-        lines = template.readlines()
-        with open("../lib/data.dart", "w") as f:
-            f.writelines(lines)
-            f.write("\n\nfinal chapterList = ")
-            f.write(str(chapterList))
-            f.write(";\n\n\n")
-            f.write("final chapterSectionList = ")
-            f.write(str(chapterDescriptionList))
-            f.write(";\n\n\n")
-            f.write("final sectionList = ")
-            f.write(str(sectionList))
-            f.write(";\n\n\n")
-            f.write("final paragraphList = ")
-            f.write(str(paragraphList))
-            f.write(";\n\n\n")
+        with open("template.txt", "r") as template:
+            lines = template.readlines()
+            with open("../lib/data.dart", "w") as f:
+                f.writelines(lines)
+                f.write("\n\nfinal chapterList = ")
+                f.write(str(chapterList))
+                f.write(";\n\n\n")
+                f.write("final chapterSectionList = ")
+                f.write(str(chapterDescriptionList))
+                f.write(";\n\n\n")
+                f.write("final sectionList = ")
+                f.write(str(sectionList))
+                f.write(";\n\n\n")
+                f.write("final paragraphList = ")
+                f.write(str(paragraphList))
+                f.write(";\n\n\n")
 
 
 def pull_title(title_no):
 
-    print(f"Doing title {title_no}")
+    print(f"\n\nDoing title {title_no}")
     url = FRONT_URL + str(title_no) + f"/granules"
     offset = 0
     res = hit_granules(url, offset)
@@ -74,6 +72,7 @@ def pull_title(title_no):
                 paragraphArr.append(current_paragraphs)
                 current_paragraphs = []
 
+            print("*", end="", flush=True)
             # get the info on sections
             number_string = get_section_numbers(granule["granuleLink"])
             chapterDescriptionArr.append(number_string)
@@ -83,6 +82,8 @@ def pull_title(title_no):
 
         # We are dealing with a section
         if granule["granuleClass"] == "LEAF":
+            print(".", end="", flush=True)
+
             # store the body of the section
             current_section.append(granule["title"].capitalize())
 
@@ -114,7 +115,7 @@ def get_txt_from_granule_url(url):
     res = requests.get(txt_link, params=payload).text
     clean_text = BeautifulSoup(res, "lxml").text
     body_text = re.sub("(([^§])|\n)*§.*\n*", "", clean_text, count=1)
-    body_text = re.sub("\$", "\\$", body_text)
+    body_text = body_text.replace("$", "€")
     body_text = re.sub("\n\n*", r"\n\n\t\t\t\t", body_text)
     return body_text
 
