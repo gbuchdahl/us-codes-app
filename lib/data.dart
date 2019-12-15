@@ -7,7 +7,9 @@ class Section {
   Section(this.title, this.number, this.paragraph, this.annotation);
 }
 
-final List indexes = List<int>.generate(52, (i) => i+1);
+final List indexes = List<int>.generate(titleList.length, (i) => i+1);
+
+final List chapterIndexes = List<int>.generate(chapterList.length, (i) => i+1);
 
 final List lowerTitleList = List<String>.generate(titleList.length, (i) => titleList[i].toLowerCase());
 
@@ -68,7 +70,7 @@ final List titleList = [
   "National Park Service and Related Programs"
 ];
 
-final description_list = [
+final titleDescriptionList = [
   "Title 1 of the United States Code outlines the general provisions of the United States Code.",
   "Title 2 of the United States Code outlines the role of Congress in the United States Code.",
   "Title 3 of the United States Code outlines the role of the President of the United States in the United States Code.",
@@ -125,21 +127,36 @@ final description_list = [
   "Title 54 of the United States Code is the compilation of the general laws regarding the National Park Service.",
 ];
 
-final List sectionList = [
+final chapterList = [
+  ["Rules of Construction",
+    "Acts and Resolutions; Formalities of Enactment; Repeals; Sealing of Instruments",
+  "Code of Laws of United States and Supplements"],
+  ["Election of Senators and Representatives", "Organization of Congress", "Compensation and Allowances of Members", "Officers and Employees of Senate and House of Representatives", "Library of Congress", "Congressional and Committeee Procedure", "Contested Elections", "Federal Corrupt Practices", "Regulation of Lobbying", "Office of Legislative Counsel", "Office of Law Revision Counsel", "Legislativee Classification Office", "Office of Parliamentarian of House of Representatives", "Office of Senate Legal Counsel", "Classification of Employees of House of Representatives", "Payroll Administration in House of Representatives", "Citizens' Commission on Public Service and Compensation", "Contested Elections", "Joint Committeee on Congressional Operations", "Federal Election Campaigns", "Office of Technology Assessment", "Congressional Mailing Standards", "Congressional Budget Office", "Congressional Budget and Fiscal Operations", "Impoundment Control", "Legislative Personnel Financial Disclosure Requirements", "Congressional Award Program", "John Heinz Competitive Excellence Award", "Emergency Powers to Eliminate Budget Deficits"]
+];
+
+final chapterSectionList = [
+  ["Sections 1 - 8", "Sections 101 - 114", "Sections 201 - 213"],
+  ["Sections 1 - 9", "Sections 9 - 33b", "Sections 31 - 59h", "Sections 60 - 130l", "Sections 131 - 185", "Sections 190 - 199", "Section 201", "Sections 241 - 252", "Section 261", "Sections 271 - 282e", "Sections 285 - 285g", "Section 286", "Sections 287 - 287d", "Sections 288 - 288n", "Sections 291 - 303", "Sections 331 - 336", "Sections 351 - 364", "Sections 381 - 396", "Section 411", "Sections 431 - 457", "Sections 471 - 481", "Sections 501 - 506", "Sections 601 - 613", "Sections 621 - 665", "Subchapters I - III", "Section 701", "Sections 801 - 811", "Section 831", "Sections 900 - 922"], // up to 20
+];
+
+final sectionList = [
+  [
+    ["Words denoting number, gender, and so forth",
+    "\"County\" as including \"parish\", and so forth",
+    "\"Vessel\" as including all means of water transportation",
+    "\"Vehicle\" as including all means of land transportation",
+    "\"Company\" or \"association\" as including successors and assigns",
+    "Limitation of term \"products of American fisheries\"",
+    "Definition of \"marriage\" and \"spouse\"",
+    "\"Person\", \"human being\", \"child\", and \"individual\" as including born-alive infant",
+    ],
+  ]
+];
+
+final paragraphList = [
   [
     [
-      [
-        Section(
-            "Words denoting number, gender, and so forth",
-            1,
-            "This is the Section's information",
-            "(July 30, 1947, ch. 388, 61 Stat. 633; June 25, 1948, ch. 645, § 6, 62 Stat. 859; Oct. 31, 1951, ch. 655, § 1, 65 Stat. 710; Pub. L. 112–231, § 2(a), Dec. 28, 2012, 126 Stat. 1619.)"),
-        Section(
-            "\"County\" as including \"parish\", and so forth",
-            2,
-            "The word \"county\" includes a parish, or any other equivalent subdivision of a State or Territory of the United States.",
-            "(July 30, 1947, ch. 388, 61 Stat. 633.)"),
-      ],
-    ],
+      ["In determining the meaning of any Act of Congress, unless the context indicates otherwise—\n\n\t\t\t\t\t\twords importing the singular include and apply to several persons, parties, or things;\n\n\t\t\t\t\t\twords importing the plural include the singular;\n\n\t\t\t\t\t\twords importing the masculine gender include the feminine as well;\n\n\t\t\t\t\t\twords used in the present tense include the future as well as the present;\n\n\t\t\t\t\t\tthe words \"insane\" and \"insane person\" shall include every idiot, insane person, and person non compos mentis;\n\n\t\t\t\t\t\tthe words \"person\" and \"whoever\" include corporations, companies, associations, firms, partnerships, societies, and joint stock companies, as well as individuals;\n\n\t\t\t\t\t\t\"officer\" includes any person authorized by law to perform the duties of the office;\n\n\t\t\t\t\t\t\"signature\" or \"subscription\" includes a mark when the person making the same intended it as such;\n\n\t\t\t\t\t\t\"oath\" includes affirmation, and \"sworn\" includes affirmed;\n\n\t\t\t\t\t\t\"writing\" includes printing and typewriting and reproductions of visual symbols by photographing, multigraphing, mimeographing, manifolding, or otherwise.\n\n(July 30, 1947, ch. 388, 61 Stat. 633; June 25, 1948, ch. 645, § 6, 62 Stat. 859; Oct. 31, 1951, ch. 655, § 1, 65 Stat. 710; Pub. L. 112–231, § 2(a), Dec. 28, 2012, 126 Stat. 1619.)"]
+    ]
   ]
 ];
