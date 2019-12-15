@@ -7,7 +7,6 @@ import 'screensize.dart';
 import 'section.dart';
 
 class ChapterList extends StatelessWidget {
-
   int titleIndex;
 
   ChapterList(this.titleIndex);
@@ -38,7 +37,13 @@ class ChapterList extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: ChapterDataSearch(titleIndex, chapterList[titleIndex], chapterSectionList[titleIndex], chapterIndexes[titleIndex]));
+                showSearch(
+                    context: context,
+                    delegate: ChapterDataSearch(
+                        titleIndex,
+                        chapterList[titleIndex],
+                        chapterSectionList[titleIndex],
+                        chapterIndexes[titleIndex]));
               },
             ),
           ],
@@ -47,73 +52,74 @@ class ChapterList extends StatelessWidget {
         body: Container(
           color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
           child: ListView.builder(
-            itemBuilder: (context, index) =>
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: <Widget>[
-                    Container(
-                      color: Colors.white,
-                      child: Padding(
-                        padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
-                        child: ListTile(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => SectionList(titleIndex, index)));
-                          },
-                          // clicking searched for item
-                          onLongPress: () {
-                            showChapter(context, titleIndex, index);
-                          },
-                          // bring up information page for item
-                          leading: Container(
-                            height: 50.0,
-                            width: 50.0,
-                            color: Colors.black,
+            itemBuilder: (context, index) => Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: <Widget>[
+                Container(
+                  color: Colors.white,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                    child: ListTile(
+                      onTap: () {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    SectionList(titleIndex, index)));
+                      },
+                      // clicking searched for item
+                      onLongPress: () {
+                        showChapter(context, titleIndex, index);
+                      },
+                      // bring up information page for item
+                      leading: Container(
+                        height: 50.0,
+                        width: 50.0,
+                        color: Colors.black,
+                        child: Center(
+                          child: Container(
+                            height: 47.0,
+                            width: 47.0,
+                            color: Colors.grey[200],
                             child: Center(
-                              child: Container(
-                                height: 47.0,
-                                width: 47.0,
-                                color: Colors.grey[200],
-                                child: Center(
-                                  child: Text(
-                                    "${ToRoman(index + 1)}",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.black,
-                                        fontSize: 14.0),
-                                  ),
-                                ),
+                              child: Text(
+                                "${ToRoman(index + 1)}",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.black,
+                                    fontSize: 14.0),
                               ),
                             ),
                           ),
-                          title: RichText(
-                            text: TextSpan(
-                              text: chapterList[titleIndex][index],
-                              style: TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 20.0),
-                            ),
-                          ),
-                          subtitle: Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Text(chapterSectionList[titleIndex][index]),
-                          ),
-//                  trailing: Icon(Icons.arrow_right),
                         ),
                       ),
+                      title: RichText(
+                        text: TextSpan(
+                          text: chapterList[titleIndex][index],
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                        ),
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 5.0),
+                        child: Text(chapterSectionList[titleIndex][index]),
+                      ),
+//                  trailing: Icon(Icons.arrow_right),
                     ),
-                    Container(
-                      height: 1.0,
-                      color: Colors.grey[300],
-                    ),
-                  ],
+                  ),
                 ),
+                Container(
+                  height: 1.0,
+                  color: Colors.grey[300],
+                ),
+              ],
+            ),
             itemCount: chapterList[titleIndex].length,
           ),
-        )
-    );
+        ));
   }
 
   String ToRoman(index) {
@@ -139,76 +145,108 @@ class ChapterList extends StatelessWidget {
   void showChapter(context, titleIndex, chapterIndex) {
     showBottomSheet(
       context: context,
-      builder: (context) =>
-          Container(
-            decoration: new BoxDecoration(
-              borderRadius: new BorderRadius.circular(6.0),
-              border: new Border.all(
-                width: 3.0,
-                color: Colors.grey[300],
+      builder: (context) => Container(
+        decoration: new BoxDecoration(
+          borderRadius: new BorderRadius.circular(6.0),
+          border: new Border.all(
+            width: 3.0,
+            color: Colors.grey[300],
+          ),
+        ),
+        height: screenHeightExcludingToolbar(context, dividedBy: 1.5),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(left: 20.0, right: 20.0),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: <Widget> [
+                  Text(
+                    "${titleIndex + 1} U.S. Code Chapter ${chapterIndex + 1}",
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20.0),
+                  ),
+                  IconButton(
+                    icon: Icon(Icons.expand_more),
+                    onPressed: () => {Navigator.pop(context)},
+                  ),
+                ],
               ),
             ),
-            height: screenHeightExcludingToolbar(context, dividedBy: 1.5),
-            child: Container(
-              color: Colors.white,
-              child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: ListView.builder(
-                      itemBuilder: (context, index) =>
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: <Widget>[
-                              Container(
-                                color: Colors.white,
-                                child: Padding(
-                                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                                  child: ListTile(
-                                    onTap: () {
-                                      Navigator.push(context, MaterialPageRoute(
-                                          builder: (context) =>
-                                              ParagraphList(
-                                                  titleIndex, chapterIndex, index)));
-                                    },
-                                    // clicking searched for item
-                                    onLongPress: () {},
-                                    // bring up information page for item
-                                    leading: Container(
-                                      height: 50.0, width: 50.0,
-                                      color: Colors.grey[200],
-                                      child: Center(
-                                        child: Text(
-                                          "§${index + 1}",
-                                          style: TextStyle(
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.black,
-                                              fontSize: 14.0),
-                                        ),
-                                      ),
-                                    ),
-                                    title: RichText(
-                                      text: TextSpan(
-                                        text: sectionList[titleIndex][chapterIndex][index],
-                                        style: TextStyle(
-                                            color: Colors.black,
-                                            fontWeight: FontWeight.normal,
-                                            fontSize: 18.0),
-                                      ),
-                                    ),
+            Container(
+              color: Colors.grey[300],
+              height: 1.0,
+            ),
+            Flexible(
+              child: Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: ListView.builder(
+                    shrinkWrap: true,
+                    itemBuilder: (context, index) => Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          color: Colors.white,
+                          child: Padding(
+                            padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                            child: ListTile(
+                              onTap: () {
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) => ParagraphList(
+                                            titleIndex, chapterIndex, index)));
+                              },
+                              // clicking searched for item
+                              onLongPress: () {},
+                              // bring up information page for item
+                              leading: Container(
+                                height: 50.0,
+                                width: 50.0,
+                                color: Colors.grey[200],
+                                child: Center(
+                                  child: Text(
+                                    "§${index + 1}",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.black,
+                                        fontSize: 14.0),
                                   ),
                                 ),
                               ),
-                              Container(
-                                height: 1.0,
-                                color: Colors.grey[300],
+                              title: RichText(
+                                text: TextSpan(
+                                  text: sectionList[titleIndex][chapterIndex]
+                                      [index],
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontWeight: FontWeight.normal,
+                                      fontSize: 18.0),
+                                ),
                               ),
-                            ],
+                            ),
                           ),
-                      itemCount: sectionList[titleIndex][chapterIndex].length,
+                        ),
+                        Container(
+                          height: 1.0,
+                          color: Colors.grey[300],
+                        ),
+                      ],
                     ),
+                    itemCount: sectionList[titleIndex][chapterIndex].length,
+                  ),
                 ),
+              ),
             ),
-          ),
+          ],
+        ),
+      ),
     );
   }
 }

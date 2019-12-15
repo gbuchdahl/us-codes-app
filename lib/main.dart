@@ -4,75 +4,19 @@ import 'data.dart';
 import 'search.dart';
 import 'API.dart';
 import 'title.dart';
+import 'splash.dart';
+import 'package:flutter/services.dart';
 
-void main() => runApp(MyApp());
 
-class SplashScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        body: Container(
-          color: Colors.white,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Center(
-                  child: CircleAvatar(
-                radius: 100.0,
-                backgroundColor: Colors.black87,
-                child: CircleAvatar(
-                    radius: 90.0,
-                    backgroundColor: Colors.lightBlue[100].withOpacity(0.5),
-                    child: Icon(
-                      Icons.account_balance,
-                      size: 100.0,
-                      color: Colors.white,
-                    )),
-              )),
-              Padding(
-                padding: const EdgeInsets.only(top: 40.0),
-                child: Center(
-                  child: Container(
-                    child: Column(
-                      children: <Widget>[
-                        Text(
-                          "U.S. CODE",
-                          style: TextStyle(
-                              fontSize: 40.0, fontWeight: FontWeight.bold),
-                        ),
-                        Text(
-                          "Titles 1-54",
-                          style: TextStyle(
-                              fontSize: 30.0, fontWeight: FontWeight.normal),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
+void main() {runApp(new MyApp());}
 
 class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
+  // This widget is the root of your applicaßtion.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
-        scaffoldBackgroundColor: Color.fromRGBO(242, 242, 247, 1),
-      ),
-      home: TitleList(),
-    );
+    return new MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: new SplashScreen());
   }
 }
 
@@ -82,6 +26,7 @@ class TitleList extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.white,
       drawer: new Drawer(
+        elevation: 4.0,
         child: new ListView(
           children: <Widget>[
             DrawerHeader(
@@ -105,7 +50,7 @@ class TitleList extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
-                  "Titles 1-54",
+                  "Titles 1 - 54",
                   style:
                       TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
                 ),
@@ -131,13 +76,20 @@ class TitleList extends StatelessWidget {
                         ),
                         TextSpan(
                             text:
-                                "is an app developed by Gabe Buchdahl (Yale College '22) and Max Lukianchikov (Yale College '20) as part of the class, "),
+                                "is an app developed by Gabe Buchdahl (Yale College '22) and Max Lukianchikov (Yale College '20) as part of their class "),
                         TextSpan(
-                            text: "CPSC 183: Law, Technology, and Culture.",
-                            style: TextStyle(fontStyle: FontStyle.italic))
+                            text: "CPSC 183: Law, Technology, and Culture, ",
+                            style: TextStyle(fontStyle: FontStyle.italic),),
+                        TextSpan(
+                            text:
+                            "taught by Lecturer and Harvard Law graduate Brad Rosen."),
                       ],
                     ),
                   ),
+                  Padding(
+                    padding: const EdgeInsets.only(top: 20.0),
+                    child: Text("Settings go here!")
+                  )
                 ],
               ),
             )
@@ -145,6 +97,12 @@ class TitleList extends StatelessWidget {
         ),
       ),
       appBar: AppBar(
+        leading: Builder(
+          builder: (context) => IconButton(
+            icon: new Icon(Icons.menu, color: Colors.black,),
+            onPressed: () => Scaffold.of(context).openDrawer(),
+          ),
+        ),
         elevation: 4.0,
         title: Text(
           "U.S. Code",
@@ -265,7 +223,7 @@ class Logo extends StatelessWidget {
       backgroundColor: Colors.black87,
       child: CircleAvatar(
         radius: 65.0,
-        backgroundColor: Colors.lightBlue[100],
+        backgroundColor: Colors.lightBlue[100].withOpacity(0.5),
         child: Center(
           child: Icon(
             Icons.account_balance,
