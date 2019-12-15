@@ -21,7 +21,7 @@ def main():
         paragraphList.append(paragraphArr)
         chapterDescriptionList.append(chapterDescriptionArr)
 
-    with open("template.dart") as template:
+    with open("template.txt") as template:
         lines = template.readlines()
         with open("../lib/data.dart", "w") as f:
             f.writelines(lines)
@@ -114,6 +114,7 @@ def get_txt_from_granule_url(url):
     res = requests.get(txt_link, params=payload).text
     clean_text = BeautifulSoup(res, "lxml").text
     body_text = re.sub("(([^§])|\n)*§.*\n*", "", clean_text, count=1)
+    body_text = re.sub("\$", "\\$", body_text)
     body_text = re.sub("\n\n*", r"\n\n\t\t\t\t", body_text)
     return body_text
 
