@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 import 'screensize.dart';
 import 'data.dart';
 import 'search.dart';
-import 'API.dart';
+// import 'API.dart';
 import 'title.dart';
 import 'splash.dart';
 import 'package:flutter/services.dart';
 
-
-void main() {runApp(new MyApp());}
+void main() {
+  runApp(new MyApp());
+}
 
 class MyApp extends StatelessWidget {
   // This widget is the root of your applicaßtion.
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-        debugShowCheckedModeBanner: false,
-        home: new SplashScreen());
+        debugShowCheckedModeBanner: false, home: new SplashScreen());
   }
 }
 
@@ -78,18 +78,18 @@ class TitleList extends StatelessWidget {
                             text:
                                 "is an app developed by Gabe Buchdahl (Yale College '22) and Max Lukianchikov (Yale College '20) as part of their class "),
                         TextSpan(
-                            text: "CPSC 183: Law, Technology, and Culture, ",
-                            style: TextStyle(fontStyle: FontStyle.italic),),
+                          text: "CPSC 183: Law, Technology, and Culture, ",
+                          style: TextStyle(fontStyle: FontStyle.italic),
+                        ),
                         TextSpan(
                             text:
-                            "taught by Lecturer and Harvard Law graduate Brad Rosen."),
+                                "taught by Lecturer and Harvard Law graduate Brad Rosen."),
                       ],
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(top: 20.0),
-                    child: Text("Settings go here!")
-                  )
+                      padding: const EdgeInsets.only(top: 20.0),
+                      child: Text("Settings go here!"))
                 ],
               ),
             )
@@ -99,7 +99,10 @@ class TitleList extends StatelessWidget {
       appBar: AppBar(
         leading: Builder(
           builder: (context) => IconButton(
-            icon: new Icon(Icons.menu, color: Colors.black,),
+            icon: new Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
             onPressed: () => Scaffold.of(context).openDrawer(),
           ),
         ),

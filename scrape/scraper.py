@@ -14,7 +14,7 @@ def main():
     open("test.json", "w").close()
     chapterList, chapterDescriptionList, sectionList, paragraphList = [], [], [], []
 
-    for i in range(1, 54):
+    for i in range(1, 2):
         chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = pull_title(i)
         chapterList.append(chapterArr)
         sectionList.append(sectionArr)
@@ -28,7 +28,7 @@ def main():
             f.write("\n\nfinal chapterList = ")
             f.write(str(chapterList))
             f.write(";\n\n\n")
-            f.write("final chapterDescriptionList = ")
+            f.write("final chapterSectionList = ")
             f.write(str(chapterDescriptionList))
             f.write(";\n\n\n")
             f.write("final sectionList = ")
