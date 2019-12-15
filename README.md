@@ -9,6 +9,7 @@ This only needs to be run one time, but the set-up is as follows:
 
 ```
 cd scrape
+python3 -m venv venv
 source /venv/bin/activate/
 pip install -r requirements.txt
 ```

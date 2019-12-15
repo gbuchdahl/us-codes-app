@@ -75,3 +75,4 @@
 test.json
 test.dart
 config.py
+/scrape/venv
