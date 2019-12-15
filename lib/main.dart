@@ -88,10 +88,7 @@ class TitleList extends StatelessWidget {
               child: Logo(),
               decoration: BoxDecoration(
                 border: Border(
-                  bottom: BorderSide(
-                    color: Colors.grey[300],
-                    width: 2.0
-                  ),
+                  bottom: BorderSide(color: Colors.grey[300], width: 2.0),
                 ),
               ),
             ),
@@ -109,7 +106,8 @@ class TitleList extends StatelessWidget {
                 padding: const EdgeInsets.only(bottom: 5.0),
                 child: Text(
                   "Titles 1-54",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
+                  style:
+                      TextStyle(fontSize: 20.0, fontWeight: FontWeight.normal),
                 ),
               ),
             ),
@@ -117,7 +115,8 @@ class TitleList extends StatelessWidget {
               thickness: 2.0,
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
+              padding:
+                  const EdgeInsets.only(left: 15.0, right: 15.0, top: 10.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
@@ -126,9 +125,16 @@ class TitleList extends StatelessWidget {
                     text: TextSpan(
                       style: TextStyle(fontSize: 16.0, color: Colors.black),
                       children: <TextSpan>[
-                        TextSpan(text: "U.S. Codes ", style: TextStyle(fontWeight: FontWeight.bold),),
-                        TextSpan(text: "is an app developed by Gabe Buchdahl (Yale '22) and Max Lukianchikov (Yale '20) as part of the class, "),
-                        TextSpan(text: "CPSC 183: Law, Technology, and Culture.", style: TextStyle(fontStyle: FontStyle.italic))
+                        TextSpan(
+                          text: "U.S. Codes ",
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                        TextSpan(
+                            text:
+                                "is an app developed by Gabe Buchdahl (Yale College '22) and Max Lukianchikov (Yale College '20) as part of the class, "),
+                        TextSpan(
+                            text: "CPSC 183: Law, Technology, and Culture.",
+                            style: TextStyle(fontStyle: FontStyle.italic))
                       ],
                     ),
                   ),
@@ -151,7 +157,9 @@ class TitleList extends StatelessWidget {
               color: Colors.black,
             ),
             onPressed: () {
-              showSearch(context: context, delegate: TitleDataSearch(titleList, titleDescriptionList));
+              showSearch(
+                  context: context,
+                  delegate: TitleDataSearch(titleList, titleDescriptionList));
             },
           ),
         ],
@@ -249,7 +257,6 @@ class MainList extends StatelessWidget {
   }
 }
 
-
 class Logo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -259,30 +266,12 @@ class Logo extends StatelessWidget {
       child: CircleAvatar(
         radius: 65.0,
         backgroundColor: Colors.lightBlue[100],
-        child: Stack(
-          children: <Widget>[
-            Center(
-              child: Icon(
-                Icons.account_balance,
-                size: 75.0,
-                color: Colors.black,
-              ),
-            ),
-            Center(
-              child: Icon(
-                Icons.account_balance,
-                size: 90.0,
-                color: Colors.black,
-              ),
-            ),
-            Center(
-              child: Icon(
-                Icons.account_balance,
-                size: 85.0,
-                color: Colors.white,
-              ),
-            ),
-          ],
+        child: Center(
+          child: Icon(
+            Icons.account_balance,
+            size: 85.0,
+            color: Colors.white,
+          ),
         ),
       ),
     );
