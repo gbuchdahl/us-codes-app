@@ -33,68 +33,74 @@ class ParagraphList extends StatelessWidget {
       ),
       body: Container(
         color: Colors.grey[100], // Color.fromRGBO(242, 242, 247, 1),
-        child: Container(
-          color: Colors.white,
-          child: ListView(
-            children: <Widget>[
-              Container(
-                color: Colors.black,
-                height: 1.0,
-              ),
-              Container(
-                color: Colors.lightBlue[100].withOpacity(0.5),
-                child: Padding(
-                  padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
-                  child: ListTile(
-                    onTap: () {}, // clicking searched for item
-                    onLongPress: () {}, // bring up information page for item
-                    leading: Container(
-                      height: 50.0,
-                      width: 50.0,
-                      color: Colors.black,
-                      child: Center(
-                        child: Container(
-                          height: 47.0,
-                          width: 47.0,
-                          color: Colors.grey[200],
-                          child: Center(
-                            child: Text(
-                              "§${sectionIndex + 1}",
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black,
-                                  fontSize: 14.0),
-                            ),
+        child: Column(
+          children: <Widget>[
+            Container(
+              color: Colors.black,
+              height: 1.0,
+            ),
+            Container(
+              color: Colors.lightBlue[100].withOpacity(0.5),
+              child: Padding(
+                padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                child: ListTile(
+                  onTap: () {}, // clicking searched for item
+                  onLongPress: () {}, // bring up information page for item
+                  leading: Container(
+                    height: 50.0,
+                    width: 50.0,
+                    color: Colors.black,
+                    child: Center(
+                      child: Container(
+                        height: 47.0,
+                        width: 47.0,
+                        color: Colors.grey[200],
+                        child: Center(
+                          child: Text(
+                            "§${sectionIndex + 1}",
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black,
+                                fontSize: 14.0),
                           ),
                         ),
                       ),
                     ),
-                    title: RichText(
-                      text: TextSpan(
-                        text: sectionList[titleIndex][chapterIndex][
-                            sectionIndex], //paragraphList[titleIndex][chapterIndex][sectionIndex][0],
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 18.0),
-                      ),
+                  ),
+                  title: RichText(
+                    text: TextSpan(
+                      text: sectionList[titleIndex][chapterIndex][
+                      sectionIndex], //paragraphList[titleIndex][chapterIndex][sectionIndex][0],
+                      style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0),
                     ),
                   ),
                 ),
               ),
-              Container(
-                color: Colors.black,
-                height: 1.0,
-              ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Text(
-                  paragraphList[titleIndex][chapterIndex][sectionIndex][0], // remove [0] after Gabe is done
-                  style: TextStyle(fontSize: 18.0),
+            ),
+            Container(
+              color: Colors.black,
+              height: 1.0,
+            ),
+            Flexible(
+              child: Container(
+                color: Colors.white,
+                child: ListView(
+                  children: <Widget>[
+                    Padding(
+                      padding: const EdgeInsets.all(20.0),
+                      child: Text(
+                        paragraphList[titleIndex][chapterIndex][sectionIndex], // remove [0] after Gabe is done
+                        style: TextStyle(fontSize: 18.0),
+                      ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            )
+          ],
         ),
       ),
     );

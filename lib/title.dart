@@ -5,6 +5,7 @@ import 'search.dart';
 import 'chapter.dart';
 import 'screensize.dart';
 import 'section.dart';
+import 'finalsearch.dart';
 
 class ChapterList extends StatelessWidget {
   int titleIndex;
@@ -39,11 +40,7 @@ class ChapterList extends StatelessWidget {
               onPressed: () {
                 showSearch(
                     context: context,
-                    delegate: ChapterDataSearch(
-                        titleIndex,
-                        chapterList[titleIndex],
-                        chapterSectionList[titleIndex],
-                        chapterIndexes[titleIndex]));
+                    delegate: FinalSearch(chapterList[titleIndex], chapterSectionList[titleIndex]));
               },
             ),
           ],

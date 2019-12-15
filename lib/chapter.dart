@@ -164,7 +164,7 @@ class SectionList extends StatelessWidget {
                 ),
                 Padding(
                   padding: const EdgeInsets.only(top: 10.0),
-                  child: Text(paragraphList[titleIndex][chapterIndex][index][0],
+                  child: Text(paragraphList[titleIndex][chapterIndex][index],
                   style: TextStyle(
                     fontSize: 18.0
                   ),),
