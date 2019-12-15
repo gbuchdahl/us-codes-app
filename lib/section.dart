@@ -38,6 +38,10 @@ class ParagraphList extends StatelessWidget {
           child: ListView(
             children: <Widget>[
               Container(
+                color: Colors.black,
+                height: 1.0,
+              ),
+              Container(
                 color: Colors.lightBlue[100].withOpacity(0.5),
                 child: Padding(
                   padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
@@ -79,7 +83,7 @@ class ParagraphList extends StatelessWidget {
                 ),
               ),
               Container(
-                color: Colors.grey[300],
+                color: Colors.black,
                 height: 1.0,
               ),
               Padding(

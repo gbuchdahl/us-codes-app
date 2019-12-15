@@ -27,3 +27,8 @@
                 // for string, format it as follows:
                     // if a new line is reached, print a \n\n\t\t\t\t in string
 
+
+
+// to-do (max):
+  // change paragraph page into a sticky header for section title
+  // revert back to non-sticky chapter page

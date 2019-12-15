@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:us_codes/sticky.dart';
 import 'screensize.dart';
 import 'data.dart';
 import 'search.dart';
@@ -144,10 +145,7 @@ class MainList extends StatelessWidget {
                 padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
                 child: ListTile(
                   onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => ChapterList(index)));
+                    index != 52 ? Navigator.push( context,MaterialPageRoute(builder: (context) => ChapterList(index))) : null;
                   }, // clicking searched for item
                   onLongPress: () {
                     print("Long");
