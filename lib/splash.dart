@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:us_codes/sticky.dart';
 import 'main.dart';
 import 'dart:async';
+import 'sticky.dart';
+import 'screensize.dart';
 
 void goToMainPage(context) {
   Navigator.push(
@@ -80,3 +83,4 @@ class SplashScreenState extends State<SplashScreen> {
         );
   }
 }
+

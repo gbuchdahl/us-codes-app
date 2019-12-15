@@ -18,6 +18,7 @@ environment:
 
 dependencies:
   http: ^0.12.0+2
+  sticky_headers: "^0.1.8"
   flutter:
     sdk: flutter
 
