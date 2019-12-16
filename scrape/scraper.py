@@ -13,7 +13,7 @@ API_KEY = config.API_KEY
 def main():
     chapterList, chapterDescriptionList, sectionList, paragraphList = [], [], [], []
 
-    for i in range(6, 53):
+    for i in range(11, 53):
         try:
             chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = pull_title(i)
         except:
