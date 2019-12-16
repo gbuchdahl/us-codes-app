@@ -13,16 +13,26 @@ API_KEY = config.API_KEY
 def main():
     chapterList, chapterDescriptionList, sectionList, paragraphList = [], [], [], []
 
-    for i in range(1, 53):
-        chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = pull_title(i)
+    for i in range(6, 53):
+        try:
+            chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = pull_title(i)
+        except:
+            print(f"error in #{i}")
+            chapterArr, chapterDescriptionArr, sectionArr, paragraphArr = (
+                [],
+                [],
+                [],
+                [],
+            )
         chapterList.append(chapterArr)
         sectionList.append(sectionArr)
         paragraphList.append(paragraphArr)
         chapterDescriptionList.append(chapterDescriptionArr)
         with open("template.txt", "r") as template:
             lines = template.readlines()
-            with open("../lib/data.dart", "w") as f:
-                f.writelines(lines)
+            with open(f"../lib/data/data{i}.dart", "w") as f:
+                if i == 1:
+                    f.writelines(lines)
                 f.write("\n\nfinal chapterList = ")
                 f.write(str(chapterList))
                 f.write(";\n\n\n")
@@ -74,7 +84,12 @@ def pull_title(title_no):
 
             print("*", end="", flush=True)
             # get the info on sections
-            number_string = get_section_numbers(granule["granuleLink"])
+            number_string = "n/a"
+            try:
+                number_string = get_section_numbers(granule["granuleLink"])
+            except:
+                print("ERROR")
+
             chapterDescriptionArr.append(number_string)
 
             # store the name of the next chapter
