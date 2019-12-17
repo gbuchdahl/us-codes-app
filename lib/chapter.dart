@@ -5,6 +5,7 @@ import 'search.dart';
 import 'title.dart';
 import 'section.dart';
 import 'screensize.dart';
+import 'finalsearch.dart';
 
 class SectionList extends StatelessWidget {
 
@@ -36,7 +37,7 @@ class SectionList extends StatelessWidget {
                 color: Colors.black,
               ),
               onPressed: () {
-                showSearch(context: context, delegate: DataSearch(titleList, titleDescriptionList));
+                showSearch(context: context, delegate: FinalSearch(sectionList[titleIndex][chapterIndex], chapterSectionList[titleIndex], "title"));
               },
             ),
           ],
