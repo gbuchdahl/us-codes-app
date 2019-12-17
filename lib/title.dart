@@ -40,7 +40,7 @@ class ChapterList extends StatelessWidget {
               onPressed: () {
                 showSearch(
                     context: context,
-                    delegate: FinalSearch(chapterList[titleIndex], chapterSectionList[titleIndex]));
+                    delegate: FinalSearch(chapterList[titleIndex], chapterSectionList[titleIndex], "title"));
               },
             ),
           ],

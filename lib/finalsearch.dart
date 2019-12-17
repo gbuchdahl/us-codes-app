@@ -9,10 +9,11 @@ class FinalSearch extends SearchDelegate<String> {
 
   List mainList;
   List mainDescriptionList;
+  String type;
 
-  FinalSearch(this.mainList, this.mainDescriptionList);
+  FinalSearch(this.mainList, this.mainDescriptionList, this.type);
 
-  List giveMaster(List inputList, List lowerMainList) {
+  List giveMaster(List inputList, List lowerMainList, List indexList) {
     var descriptions = [];
     var index = [];
     var titles = [];
@@ -22,7 +23,7 @@ class FinalSearch extends SearchDelegate<String> {
         if (mainList.where((p) => p.startsWith(query)).toList()[i] ==
             mainList[j]) {
           descriptions.add(mainDescriptionList[j]);
-          index.add(indexes[j]);
+          index.add(indexList[j]);
           titles.add(mainList[j]);
         }
       }
@@ -30,7 +31,7 @@ class FinalSearch extends SearchDelegate<String> {
     return [descriptions, index, titles];
   }
 
-  List giveMaster2(List inputList, List lowerMainList, lowerQuery) {
+  List giveMaster2(List inputList, List lowerMainList, List indexList, lowerQuery) {
     var descriptions = [];
     var index = [];
     var titles = [];
@@ -40,7 +41,7 @@ class FinalSearch extends SearchDelegate<String> {
         if (lowerMainList.where((p) => p.startsWith(lowerQuery)).toList()[i] ==
             lowerMainList[j]) {
           descriptions.add(mainDescriptionList[j]);
-          index.add(indexes[j]);
+          index.add(indexList[j]);
           titles.add(mainList[j]);
         }
       }
@@ -81,6 +82,8 @@ class FinalSearch extends SearchDelegate<String> {
   @override
   Widget buildSuggestions(BuildContext context) {
 
+    var indexList = List<int>.generate(mainList.length, (i) => i + 1);
+
     var suggestionList = [];
 
     if (query.isNotEmpty) {
@@ -90,76 +93,215 @@ class FinalSearch extends SearchDelegate<String> {
 
       suggestionList = [
         giveMaster2(
-            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList, lowerQuery)[2],
+            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList, indexList, lowerQuery)[2],
         giveMaster2(
-            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList,lowerQuery)[0],
+            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList, indexList, lowerQuery)[0],
         giveMaster2(
-            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList, lowerQuery)[1]
+            lowerMainList.where((p) => p.startsWith(lowerQuery)).toList(), lowerMainList, indexList, lowerQuery)[1]
       ];
     }
     else {
-      suggestionList = [mainList, mainDescriptionList, indexes];
+      suggestionList = [mainList, mainDescriptionList, indexList];
     }
 
-    return Container(
-      color: Color.fromRGBO(242, 242, 247, 1),
-      child: ListView.builder(
-        itemBuilder: (context, index) => Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: <Widget>[
-            Container(
-              color: Colors.white,
-              child: Padding(
-                padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
-                child: ListTile(
-                  onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); }, // clicking searched for item
-                  onLongPress: () {}, // bring up information page for item
-                  leading: CircleAvatar(
-                    backgroundColor: Colors.black,
-                    radius: 32.0,
-                    child: CircleAvatar(
-                      backgroundColor: Colors.grey[200],
-                      radius: 30.0,
-                      child: Text(
-                        ToRoman(suggestionList[2][index]),
-                        style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            color: Colors.black,
-                            fontSize: 14.0),
+    if (type == "main"){
+      return Container(
+        color: Color.fromRGBO(242, 242, 247, 1),
+        child: ListView.builder(
+          itemBuilder: (context, index) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 10.0),
+                  child: ListTile(
+                    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); }, // clicking searched for item
+                    onLongPress: () {}, // bring up information page for item
+                    leading: CircleAvatar(
+                      backgroundColor: Colors.black,
+                      radius: 32.0,
+                      child: CircleAvatar(
+                        backgroundColor: Colors.grey[200],
+                        radius: 30.0,
+                        child: Text(
+                          ToRoman(suggestionList[2][index]),
+                          style: TextStyle(
+                              fontWeight: FontWeight.bold,
+                              color: Colors.black,
+                              fontSize: 14.0),
+                        ),
                       ),
                     ),
+                    title: RichText(
+                      text: TextSpan(
+                          text: suggestionList[0][index]
+                              .substring(0, query.length),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                          children: [
+                            TextSpan(
+                              text: suggestionList[0][index]
+                                  .substring(query.length),
+                              style:
+                              TextStyle(color: Colors.grey, fontSize: 20.0),
+                            )
+                          ]),
+                    ),
+                    subtitle: Text(suggestionList[1][index]),
                   ),
-                  title: RichText(
-                    text: TextSpan(
-                        text: suggestionList[0][index]
-                            .substring(0, query.length),
-                        style: TextStyle(
-                            color: Colors.black,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20.0),
-                        children: [
-                          TextSpan(
-                            text: suggestionList[0][index]
-                                .substring(query.length),
-                            style:
-                            TextStyle(color: Colors.grey, fontSize: 20.0),
-                          )
-                        ]),
-                  ),
-                  subtitle: Text(suggestionList[1][index]),
                 ),
               ),
-            ),
-            Container(
-              height: 1.0,
-              color: Colors.grey[300],
-            ),
-          ],
+              Container(
+                height: 1.0,
+                color: Colors.grey[300],
+              ),
+            ],
+          ),
+          itemCount: suggestionList[2].length,
         ),
-        itemCount: suggestionList[2].length,
-      ),
-    );
+      );
+    }
+    else if (type == "title"){
+      return Container(
+        color: Color.fromRGBO(242, 242, 247, 1),
+        child: ListView.builder(
+          itemBuilder: (context, index) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                  child: ListTile(
+                    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); }, // clicking searched for item
+                    onLongPress: () {}, // bring up information page for item
+                    leading: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      color: Colors.black,
+                      child: Center(
+                        child: Container(
+                          height: 47.0,
+                          width: 47.0,
+                          color: Colors.grey[200],
+                          child: Center(
+                            child: Text(
+                              "${ToRoman(index + 1)}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 14.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: RichText(
+                      text: TextSpan(
+                          text: suggestionList[0][index]
+                              .substring(0, query.length),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                          children: [
+                            TextSpan(
+                              text: suggestionList[0][index]
+                                  .substring(query.length),
+                              style:
+                              TextStyle(color: Colors.grey, fontSize: 20.0),
+                            )
+                          ]),
+                    ),
+                    subtitle: Padding(
+                      padding: const EdgeInsets.only(top: 5.0),
+                      child: Text(suggestionList[1][index]),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 1.0,
+                color: Colors.grey[300],
+              ),
+            ],
+          ),
+          itemCount: suggestionList[2].length,
+        ),
+      );
+    }
+    else if (type == "chapter"){
+      return Container(
+        color: Color.fromRGBO(242, 242, 247, 1),
+        child: ListView.builder(
+          itemBuilder: (context, index) => Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                color: Colors.white,
+                child: Padding(
+                  padding: EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+                  child: ListTile(
+                    onTap: () { Navigator.push(context, MaterialPageRoute(builder: (context) => ChapterList(index))); }, // clicking searched for item
+                    onLongPress: () {}, // bring up information page for item
+                    leading: Container(
+                      height: 50.0,
+                      width: 50.0,
+                      color: Colors.black,
+                      child: Center(
+                        child: Container(
+                          height: 47.0,
+                          width: 47.0,
+                          color: Colors.grey[200],
+                          child: Center(
+                            child: Text(
+                              "§${index + 1}",
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                  fontSize: 14.0),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                    title: RichText(
+                      text: TextSpan(
+                          text: suggestionList[0][index]
+                              .substring(0, query.length),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 20.0),
+                          children: [
+                            TextSpan(
+                              text: suggestionList[0][index]
+                                  .substring(query.length),
+                              style:
+                              TextStyle(color: Colors.grey, fontSize: 20.0),
+                            )
+                          ]),
+                    ),
+                  ),
+                ),
+              ),
+              Container(
+                height: 1.0,
+                color: Colors.grey[300],
+              ),
+            ],
+          ),
+          itemCount: suggestionList[2].length,
+        ),
+      );
+    }
+
   }
 
   String ToRoman(index) {
